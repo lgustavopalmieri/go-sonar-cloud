@@ -1,5 +1,5 @@
 name: ci-sonarcloud
-on: 
+on:
   pull_request:
     branches:
       - develop
@@ -8,13 +8,13 @@ jobs:
   run-ci:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-go@v2
-      with:
-        go-version: 1.18
-    - run: go test  -coverprofile=coverage.out
-    - name: SonarCloud Scan
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: 1.18
+      - run: go test  -coverprofile=coverage.out
+      - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
